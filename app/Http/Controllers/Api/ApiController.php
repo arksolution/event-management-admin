@@ -85,6 +85,28 @@ class ApiController extends Controller
         return response(['message' => 'Logout success'], 200);
     }
 
+    function registerAccount(){
+        $data = \request();
+        if (Attendee::where('lastname', $data['lastname'])->first() != null)
+            return response()->json([
+                'message' => 'Lastname is already used'
+            ], 401);
+
+        $data = $data->validate([
+            'firstname' => '',
+            'lastname' => '',
+            'username' => '',
+            'email' => '',
+            'token' => '',
+            'registration_code' => '',
+        ]);
+
+        Attendee::create($data);
+        return response()->json([
+            'message' => 'Account successfully created'
+        ], 200);
+    }
+
     function registration($os, $es){
         $data = \request();
         if ($data['token'] == null)

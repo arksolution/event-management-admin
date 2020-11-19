@@ -20,6 +20,7 @@ Route::group(['prefix' => 'v1'], function (){
    Route::get('registrations' , 'Api\ApiController@registrations');
    Route::get('organizers/{organizer_slug}/events/{event_slug}' , 'Api\ApiController@detail');
    Route::post('login', 'Api\ApiController@login');
+   Route::post('register', 'Api\ApiController@registerAccount');
    Route::post('logout', 'Api\ApiController@logout');
    Route::post('organizers/{organizer_slug}/events/{event_slug}/registration', 'Api\ApiController@registration');
 });
