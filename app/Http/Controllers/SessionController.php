@@ -6,6 +6,7 @@ use App\Channel;
 use App\Event;
 use App\Room;
 use App\Session;
+use App\Session_registration;
 use App\Speaker;
 use App\Speaker_session;
 use Illuminate\Http\Request;
@@ -179,6 +180,12 @@ class SessionController extends Controller
             'speaker' => 'required',
         ]);
 
+        if ($session->type == 'workshop' && $data['type'] == 'talk')
+            if (Session_registration::where('session_id', $session->id)->first() != null)
+                return back()->withErrors([
+                    'type' => 'The session is registered, cannot be changed to the type'
+                ])->withInput();
+
         if (Room::find($data['room_id'])->session->where('id', '<>', $session->id)->where('title', $data['title'])->count() != 0)
             return back()->withErrors([
                 'title' => 'Title is already used',
@@ -216,6 +223,7 @@ class SessionController extends Controller
             if (!($data['start'] >= $value->end || $data['end'] <= $value->start))
                 return back()->withErrors(['room_id' => 'Room already booked during this time'])
                     ->withInput($request->input());
+
 
         Speaker_session::where('session_id', $session->id)->delete();
 

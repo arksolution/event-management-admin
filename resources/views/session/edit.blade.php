@@ -13,10 +13,13 @@
         <div class="row">
             <div class="col-12 col-lg-4 mb-3">
                 <label for="selectType">Type</label>
-                <select class="form-control" id="selectType" name="type">
+                <select class="form-control {{$errors->first('type') ? 'is-invalid' : ''}}" id="selectType" name="type">
                     <option value="talk" {{old('type') == 'talk' ? 'selected' : $session->type == 'talk' ? 'selected' : ''}}>Talk</option>
-                    <option value="workshop" {{old('type') == 'workshop' ? 'selected' : $session->type == 'workshop' ? 'selected' : ''}}>Workshop</option>
+                    <option value="workshop" {{old('type') == 'workshop' ? 'selected' : $session->type == 'workshop' && old('type') != 'talk' ? 'selected' : ''}}>Workshop</option>
                 </select>
+                <div class="invalid-feedback">
+                    {{$errors->first('type')}}
+                </div>
             </div>
         </div>
 
