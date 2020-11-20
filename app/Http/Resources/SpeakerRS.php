@@ -17,9 +17,12 @@ class SpeakerRS extends JsonResource
         $sessionJoined = [];
 
         foreach ($this->speaker_session as $value){
-            $value->session->event_slug = $value->session->room->channel->event->slug;
-            $value->session->organizer_slug = $value->session->room->channel->event->organizer->slug;
-            array_push($sessionJoined, $value->session);
+            $data = null;
+            $data['id'] = $value->session->id;
+            $data['title'] = $value->session->title;
+            $data['event_slug'] = $value->session->room->channel->event->slug;
+            $data['organizer_slug'] = $value->session->room->channel->event->organizer->slug;
+            array_push($sessionJoined, $data);
         }
 
         $localFileName  = public_path().'\uploads\avatars\\' . $this->avatar;
@@ -32,7 +35,7 @@ class SpeakerRS extends JsonResource
             'link' => $this->link,
             'info' => $this->info,
             'session_joined' => $sessionJoined,
-            'avatar' => $ImgfileEncode
+            'avatar' => $ImgfileEncode,
         ];
     }
 }

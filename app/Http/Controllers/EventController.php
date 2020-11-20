@@ -50,7 +50,7 @@ class EventController extends Controller
         $data = $request->validate([
            'name' => 'required',
            'slug' => 'regex:/^([0-9a-z]+(-[0-9a-z]+)*)+$/',
-           'date' => 'required|date',
+           'date' => 'required|date_format:Y-m-d',
         ],[
             'slug.regex' => '"Slug must not be empty and only contain a-z, 0-9 and \'-\''
         ]);
@@ -138,7 +138,7 @@ class EventController extends Controller
         $data = $request->validate([
             'name' => 'required',
             'slug' => 'regex:/^([0-9a-z]+(-[0-9a-z]+)*)+$/',
-            'date' => 'required|date',
+            'date' => 'required|date_format:Y-m-d',
         ],[
             'slug.regex' => '"Slug must not be empty and only contain a-z, 0-9 and \'-\''
         ]);
@@ -174,7 +174,7 @@ class EventController extends Controller
         if ($event->organizer->id != Auth::user()->id)
             return abort(404);
 
-        if ($event->channel->count() != 0 && $event->ticket->count() != 0)
+        if ($event->channel->count() != 0 || $event->ticket->count() != 0)
             return back()->with([
                 'message' => 'Event is already used',
                 'status' => 'danger'
