@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 31, 2020 lúc 04:43 AM
+-- Thời gian đã tạo: Th10 20, 2020 lúc 05:35 AM
 -- Phiên bản máy phục vụ: 10.1.38-MariaDB
 -- Phiên bản PHP: 7.3.2
 
@@ -34,7 +34,7 @@ CREATE TABLE `attendees` (
   `lastname` varchar(45) NOT NULL,
   `username` varchar(45) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `registration_code` varchar(6) NOT NULL,
+  `registration_code` varchar(255) NOT NULL,
   `login_token` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -242,7 +242,18 @@ INSERT INTO `attendees` (`id`, `firstname`, `lastname`, `username`, `email`, `re
 (197, 'Dorisa', 'Heminsley', 'dheminsley2o', 'dheminsley2o@photobucket.com', 'PRGKEV', ''),
 (198, 'Benton', 'Jesson', 'bjesson2p', 'bjesson2p@comcast.net', 'ZEQCXQ', ''),
 (199, 'Billie', 'Windrus', 'bwindrus2q', 'bwindrus2q@istockphoto.com', 'HTPE2X', ''),
-(200, 'Silvie', 'Kaye', 'skaye2r', 'skaye2r@adobe.com', '35UWIU', '');
+(200, 'Silvie', 'Kaye', 'skaye2r', 'skaye2r@adobe.com', '35UWIU', ''),
+(201, 'asd', 'asd', 'asd', 'asd', 'asd', NULL),
+(202, 'Phan', 'Tín', 'asdasd', 'tin.phan1206@gmail.com', 'asd', ''),
+(203, 'Phan', 'Tína', 'asd', 'tin.phan1206@gmail.com', 'asd', ''),
+(204, 'asd', 'asddd', 'asd', 'asd', 'asd', ''),
+(205, 'asd', 'asdasd', 'asd', 'asdasd@email.com', 'asd', NULL),
+(206, 'asdas', 'asdád', 'ađá', 'asdasd@email.comsa', '111', NULL),
+(207, '123', '123', '123', '123@email.com', '123', NULL),
+(208, '123', '123123', '123', '123@email.com', '123', ''),
+(209, 'RichKy', 'star', 'Ricky Star', 'star@gmail.com', 'asdasdasdA', ''),
+(210, 'asd', 'asdasdasd', 'asd', 'asd@com.com', 'asdasdasdA', NULL),
+(211, 'asdasd', 'aaaaaaaaaa', 'asdasd', 'asdasd@com.com', 'asdasdasdA', NULL);
 
 -- --------------------------------------------------------
 
@@ -1108,7 +1119,9 @@ INSERT INTO `registrations` (`id`, `attendee_id`, `ticket_id`, `registration_tim
 (699, 18, 9, '2021-06-23 11:30:00'),
 (700, 41, 9, '2021-06-04 17:09:37'),
 (701, 38, 9, '2021-06-26 17:42:32'),
-(702, 87, 10, '2021-01-16 06:51:07');
+(702, 87, 10, '2021-01-16 06:51:07'),
+(703, 208, 3, NULL),
+(704, 202, 3, NULL);
 
 -- --------------------------------------------------------
 
@@ -1156,7 +1169,6 @@ CREATE TABLE `sessions` (
   `room_id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` mediumtext,
-  `speaker` varchar(45) DEFAULT NULL,
   `start` datetime NOT NULL,
   `end` datetime NOT NULL,
   `type` enum('talk','workshop') NOT NULL,
@@ -1167,49 +1179,47 @@ CREATE TABLE `sessions` (
 -- Đang đổ dữ liệu cho bảng `sessions`
 --
 
-INSERT INTO `sessions` (`id`, `room_id`, `title`, `description`, `speaker`, `start`, `end`, `type`, `cost`) VALUES
-(1, 1, 'Different place, same skills', 'In an increasingly globalized economy, flows of migrants are contributing to profound demographic changes and shifts in work. The need to create new international standards for skills development and applications in global, human-centered workplaces is more pressing than ever. How can countries harness these trends to build an inclusive global labour market, while recognizing diversity and local specificities?', '[\"1\",\"2\"]', '2021-09-23 09:00:00', '2021-09-23 09:45:00', 'talk', '0.00'),
-(2, 1, 'Making work meaningful', 'The increasing shift in the values and cultures of our societies, and growing social and economic inequalities bring new expectations in workplaces. How do we move from discontent to fulfillment? This workshop will examine best practices from respective industries and share lessons learned towards more prosperous individuals and communities.', '[1]', '2021-09-23 10:00:00', '2021-09-23 11:30:00', 'talk', NULL),
-(3, 2, 'Skills and sustainability', 'By 2050, 66 percent of the world’s population is projected to be urban. Moreover, the rapid expansion of human settlements is changing social dynamics and the lifestyle of city-dwellers, especially in megacities. What will be their role as key stakeholders in our globalized world? And how does this affect skilled (and re-skilled) people to achieve sustainable urbanization?', '[1]', '2021-09-23 10:00:00', '2021-09-23 11:30:00', 'talk', NULL),
-(4, 2, 'Designing skills pathways', 'During this workshop, we summarize trends and challenges within three tracks: economy, society, and environment. Participants will exchange views on what skills, best practices, and solutions they need for their specific regions to meet demands and close their skills gap.', '[1]', '2021-09-23 13:00:00', '2021-09-23 15:00:00', 'workshop', '50.00'),
-(5, 1, 'Skills change lives', 'Through a series of five short inspiring speeches, changemakers will share solutions through skills to the most pressing social challenges we face, leading the way to an inclusive society.', '[1]', '2021-09-23 13:00:00', '2021-09-23 13:45:00', 'talk', NULL),
-(6, 2, 'Education ecosystem for the future', 'In our fast-changing world, traditional forms of education are becoming outdated. We need to redesign our education systems. What are approaches to learning work in this new world?', '[1]', '2021-09-23 15:00:00', '2021-09-23 17:00:00', 'workshop', '30.00'),
-(7, 3, 'The future of work', 'What are young people’s expectations and concerns for their professional future? WorldSkills and the OECD have joined efforts to listen to the youth and provide them with a platform for action.', '[1]', '2021-09-23 11:00:00', '2021-09-23 11:45:00', 'talk', NULL),
-(8, 3, 'Digital skills wave', 'Technological progress and the advent of the digital economy have created new business models and a demand for a more skilled workforce. However, uneven digital penetration across socio-economic landscapes results in a digital skills divide, with many people unable to catch up to the fast-paced digital workforce. What are the cutting-edge, promising skills of this field?', '[1]', '2021-09-23 13:00:00', '2021-09-23 13:45:00', 'talk', NULL),
-(9, 4, 'Training and innovation', 'In this rapidly evolving technological and digital world, adopting and maintaining the “right” skills can often feel like an impossible task. What are the skills missing in your industry? How can we collaborate to find solutions to close the skills gap? This workshop will explore new ways to train workforces to better adapt to our evolving economies.', '[1]', '2021-09-23 14:00:00', '2021-09-23 16:00:00', 'workshop', '45.00'),
-(10, 5, 'What are green skills?', 'The sustainability issues faced by our societies require a new kind of growth that guarantees that future generations will enjoy the high standards of living that we expect today. With this deepening collective conscience comes a need to explore and develop “green skills” that not only focus on sustainable production and frugal living, but also help us overcome environmental challenges in a systemic way.', '[1]', '2021-09-23 10:00:00', '2021-09-23 10:45:00', 'talk', NULL),
-(11, 5, 'Greening your workforce', 'This hands-on session will explore the green skills necessary for creating self-sustaining work ecosystems. How can sustainability be integrated into your industry\'s skills standards? What type of technologies and innovations will allow different industries to face the ecological transition and tackle climate change?', '[1]', '2021-09-23 13:00:00', '2021-09-23 14:30:00', 'workshop', '25.00'),
-(12, 5, 'Our planet in 2050', 'Five young adults take to the stage to share inspiring stories about leveraging skills to overcome environmental challenges, to more effectively incorporate climate change awareness into education and, more generally, to create solutions for a self-sustaining ecosystem.', '[1]', '2021-09-23 15:00:00', '2021-09-23 16:00:00', 'talk', NULL),
-(13, 6, 'React today and tomorrow', 'Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi. Cras non velit nec nisi vulputate nonummy.', '[1]', '2018-06-12 09:00:00', '2018-06-12 09:45:00', 'talk', NULL),
-(14, 6, 'Concurrent rendering', 'Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi.', '[1]', '2018-06-12 10:00:00', '2018-06-12 10:45:00', 'talk', NULL),
-(15, 6, 'React suspense', 'Phasellus in felis. Donec semper sapien a libero. Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius. Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi. Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla.', '[1]', '2018-06-12 11:00:00', '2018-06-12 11:45:00', 'talk', NULL),
-(16, 7, '90% Cleaner React', 'In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem.', '[1]', '2018-06-12 13:00:00', '2018-06-12 13:45:00', 'talk', NULL),
-(17, 7, 'GraphQL in react', 'Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem. Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio. Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat.', '[1]', '2018-06-12 14:00:00', '2018-06-12 14:45:00', 'talk', NULL),
-(18, 7, 'Building a todo app', 'Nulla facilisi. Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus. Phasellus in felis. Donec semper sapien a libero. Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis.', '[1]', '2018-06-12 15:00:00', '2018-06-12 16:30:00', 'workshop', '25.00'),
-(19, 8, 'React in 2021', 'Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque. Duis bibendum. Morbi non quam nec dui luctus rutrum.', '[1]', '2021-10-24 09:00:00', '2021-10-24 09:45:00', 'talk', NULL),
-(20, 8, 'Hooks', 'Nullam varius.', '[1]', '2021-10-24 10:00:00', '2021-10-24 10:45:00', 'talk', NULL),
-(21, 8, 'Beyond react', 'Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.', '[1]', '2021-10-24 11:00:00', '2021-10-24 11:45:00', 'talk', NULL),
-(22, 9, 'Next.js: Universal React', 'Etiam faucibus cursus urna. Ut tellus. Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi. Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus. Phasellus in felis. Donec semper sapien a libero.', '[1]', '2021-10-24 13:00:00', '2021-10-24 13:45:00', 'talk', NULL),
-(23, 9, 'Realtime Apps', 'Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris. Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus. Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien.', '[1]', '2021-10-24 14:00:00', '2021-10-24 14:45:00', 'talk', NULL),
-(24, 9, 'Developing AR Apps', 'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio. Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat.', '[1]', '2021-10-24 15:00:00', '2021-10-24 16:30:00', 'workshop', '25.00'),
-(25, 10, 'State of the Vuenion', 'Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.', '[1]', '2020-02-14 09:30:00', '2020-02-14 10:15:00', 'talk', NULL),
-(26, 11, 'Modern Web Apps', 'Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque. Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus. In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti.', '[1]', '2020-02-14 10:30:00', '2020-02-14 11:15:00', 'talk', NULL),
-(27, 12, 'Advanced Animations', 'Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo.', '[1]', '2020-02-14 10:30:00', '2020-02-14 11:15:00', 'talk', NULL),
-(28, 12, 'NativeScript-Vue + ML', 'Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat. Nulla nisl. Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa.', '[1]', '2020-02-14 11:30:00', '2020-02-14 12:15:00', 'talk', NULL),
-(29, 10, 'GraphQL + Apollo', 'Curabitur in libero ut massa volutpat convallis.', '[1]', '2020-02-14 13:30:00', '2020-02-14 14:15:00', 'talk', NULL),
-(30, 11, 'Media for everyone', 'Aliquam erat volutpat. In congue. Etiam justo.', '[1]', '2020-02-14 13:30:00', '2020-02-14 14:15:00', 'talk', NULL),
-(31, 10, 'Designing Components', 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.', '[1]', '2020-02-14 15:00:00', '2020-02-14 16:30:00', 'workshop', '30.00'),
-(32, 12, 'Next Level Jest Testing', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque. Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus. In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem.', '[1]', '2020-02-14 15:00:00', '2020-02-14 16:30:00', 'workshop', '30.00'),
-(33, 13, 'Progressive Angular', 'Integer a nibh. In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet. Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti. Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris. Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.', '[1]', '2021-09-30 09:00:00', '2021-09-30 09:45:00', 'talk', NULL),
-(34, 15, 'Unit Testing Angular', 'Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat. Nulla nisl. Nunc nisl.', '[1]', '2021-09-30 09:00:00', '2021-09-30 09:45:00', 'talk', NULL),
-(35, 14, 'Advanced NGRX', 'Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat.', '[1]', '2021-09-30 10:00:00', '2021-09-30 10:45:00', 'talk', NULL),
-(36, 11, 'Testing with Cypress.io', 'In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque. Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus. In sagittis dui vel nisl. Duis ac nibh.', '[1]', '2021-09-30 10:00:00', '2021-09-30 10:45:00', 'talk', NULL),
-(37, 13, 'Web Components', 'Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros. Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat. In congue. Etiam justo. Etiam pretium iaculis justo. In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.', '[1]', '2021-09-30 11:00:00', '2021-09-30 11:45:00', 'talk', NULL),
-(38, 16, 'Not Every App is a SPA', 'Nulla mollis molestie lorem. Quisque ut erat. Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.', '[1]', '2021-09-30 11:00:00', '2021-09-30 11:45:00', 'talk', NULL),
-(39, 14, 'Using RxJS', 'Morbi non quam nec dui luctus rutrum. Nulla tellus. In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.', '[1]', '2021-09-30 13:00:00', '2021-09-30 14:30:00', 'workshop', '75.50'),
-(40, 14, 'Angular Playground', 'Proin at turpis a pede posuere nonummy. Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue.', '[1]', '2021-09-30 15:00:00', '2021-09-30 16:00:00', 'workshop', '50.00'),
-(41, 15, 'Advanced Cypress.io', 'Integer ac neque. Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus. In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.', '[1]', '2021-09-30 15:00:00', '2021-09-30 16:00:00', 'workshop', '50.00'),
-(42, 16, 'UX in 2021', 'Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros. Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat. In congue. Etiam justo. Etiam pretium iaculis justo.', '[1]', '2021-09-30 13:00:00', '2021-09-30 14:30:00', 'workshop', '75.50');
+INSERT INTO `sessions` (`id`, `room_id`, `title`, `description`, `start`, `end`, `type`, `cost`) VALUES
+(3, 2, 'Skills and sustainability', 'By 2050, 66 percent of the world’s population is projected to be urban. Moreover, the rapid expansion of human settlements is changing social dynamics and the lifestyle of city-dwellers, especially in megacities. What will be their role as key stakeholders in our globalized world? And how does this affect skilled (and re-skilled) people to achieve sustainable urbanization?', '2021-09-23 10:00:00', '2021-09-23 11:30:00', 'talk', NULL),
+(4, 2, 'Designing skills pathways', 'During this workshop, we summarize trends and challenges within three tracks: economy, society, and environment. Participants will exchange views on what skills, best practices, and solutions they need for their specific regions to meet demands and close their skills gap.', '2021-09-23 13:00:00', '2021-09-23 15:00:00', 'workshop', '50.00'),
+(5, 1, 'Skills change lives', 'Through a series of five short inspiring speeches, changemakers will share solutions through skills to the most pressing social challenges we face, leading the way to an inclusive society.', '2021-09-23 13:00:00', '2021-09-23 13:45:00', 'talk', '0.00'),
+(6, 2, 'Education ecosystem for the future', 'In our fast-changing world, traditional forms of education are becoming outdated. We need to redesign our education systems. What are approaches to learning work in this new world?', '2021-09-23 15:00:00', '2021-09-23 17:00:00', 'workshop', '30.00'),
+(7, 3, 'The future of work', 'What are young people’s expectations and concerns for their professional future? WorldSkills and the OECD have joined efforts to listen to the youth and provide them with a platform for action.', '2021-09-23 11:00:00', '2021-09-23 11:45:00', 'talk', NULL),
+(8, 3, 'Digital skills wave', 'Technological progress and the advent of the digital economy have created new business models and a demand for a more skilled workforce. However, uneven digital penetration across socio-economic landscapes results in a digital skills divide, with many people unable to catch up to the fast-paced digital workforce. What are the cutting-edge, promising skills of this field?', '2021-09-23 13:00:00', '2021-09-23 13:45:00', 'talk', NULL),
+(9, 4, 'Training and innovation', 'In this rapidly evolving technological and digital world, adopting and maintaining the “right” skills can often feel like an impossible task. What are the skills missing in your industry? How can we collaborate to find solutions to close the skills gap? This workshop will explore new ways to train workforces to better adapt to our evolving economies.', '2021-09-23 14:00:00', '2021-09-23 16:00:00', 'workshop', '45.00'),
+(10, 5, 'What are green skills?', 'The sustainability issues faced by our societies require a new kind of growth that guarantees that future generations will enjoy the high standards of living that we expect today. With this deepening collective conscience comes a need to explore and develop “green skills” that not only focus on sustainable production and frugal living, but also help us overcome environmental challenges in a systemic way.', '2021-09-23 10:00:00', '2021-09-23 10:45:00', 'talk', NULL),
+(11, 5, 'Greening your workforce', 'This hands-on session will explore the green skills necessary for creating self-sustaining work ecosystems. How can sustainability be integrated into your industry\'s skills standards? What type of technologies and innovations will allow different industries to face the ecological transition and tackle climate change?', '2021-09-23 13:00:00', '2021-09-23 14:30:00', 'workshop', '25.00'),
+(12, 5, 'Our planet in 2050', 'Five young adults take to the stage to share inspiring stories about leveraging skills to overcome environmental challenges, to more effectively incorporate climate change awareness into education and, more generally, to create solutions for a self-sustaining ecosystem.', '2021-09-23 15:00:00', '2021-09-23 16:00:00', 'talk', NULL),
+(13, 6, 'React today and tomorrow', 'Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi. Cras non velit nec nisi vulputate nonummy.', '2018-06-12 09:00:00', '2018-06-12 09:45:00', 'talk', NULL),
+(14, 6, 'Concurrent rendering', 'Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi.', '2018-06-12 10:00:00', '2018-06-12 10:45:00', 'talk', NULL),
+(15, 6, 'React suspense', 'Phasellus in felis. Donec semper sapien a libero. Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius. Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi. Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla.', '2018-06-12 11:00:00', '2018-06-12 11:45:00', 'talk', NULL),
+(16, 7, '90% Cleaner React', 'In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem.', '2018-06-12 13:00:00', '2018-06-12 13:45:00', 'talk', NULL),
+(17, 7, 'GraphQL in react', 'Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem. Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio. Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat.', '2018-06-12 14:00:00', '2018-06-12 14:45:00', 'talk', NULL),
+(18, 7, 'Building a todo app', 'Nulla facilisi. Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus. Phasellus in felis. Donec semper sapien a libero. Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis.', '2022-06-12 15:00:00', '2022-06-12 17:30:00', 'workshop', '25.00'),
+(19, 8, 'React in 2021', 'Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque. Duis bibendum. Morbi non quam nec dui luctus rutrum.', '2021-10-24 09:00:00', '2021-10-24 09:45:00', 'talk', '0.00'),
+(20, 8, 'Hooks', 'Nullam varius.', '2021-10-24 10:00:00', '2021-10-24 10:45:00', 'talk', NULL),
+(21, 8, 'Beyond react', 'Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.', '2021-10-24 11:00:00', '2021-10-24 11:45:00', 'talk', NULL),
+(22, 9, 'Next.js: Universal React', 'Etiam faucibus cursus urna. Ut tellus. Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi. Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus. Phasellus in felis. Donec semper sapien a libero.', '2021-10-24 13:00:00', '2021-10-24 13:45:00', 'talk', NULL),
+(23, 9, 'Realtime Apps', 'Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris. Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus. Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien.', '2021-10-24 14:00:00', '2021-10-24 14:45:00', 'talk', NULL),
+(24, 9, 'Developing AR Apps', 'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio. Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat.', '2021-10-24 15:00:00', '2021-10-24 16:30:00', 'workshop', '25.00'),
+(25, 10, 'State of the Vuenion', 'Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.', '2020-02-14 09:30:00', '2020-02-14 10:15:00', 'talk', NULL),
+(26, 11, 'Modern Web Apps', 'Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque. Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus. In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti.', '2020-02-14 10:30:00', '2020-02-14 11:15:00', 'talk', NULL),
+(27, 12, 'Advanced Animations', 'Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo.', '2020-02-14 10:30:00', '2020-02-14 11:15:00', 'talk', NULL),
+(28, 12, 'NativeScript-Vue + ML', 'Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat. Nulla nisl. Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa.', '2020-02-14 11:30:00', '2020-02-14 12:15:00', 'talk', NULL),
+(29, 10, 'GraphQL + Apollo', 'Curabitur in libero ut massa volutpat convallis.', '2020-02-14 13:30:00', '2020-02-14 14:15:00', 'talk', NULL),
+(30, 11, 'Media for everyone', 'Aliquam erat volutpat. In congue. Etiam justo.', '2020-02-14 13:30:00', '2020-02-14 14:15:00', 'talk', NULL),
+(31, 10, 'Designing Components', 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.', '2020-02-14 15:00:00', '2020-02-14 16:30:00', 'workshop', '30.00'),
+(32, 12, 'Next Level Jest Testing', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque. Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus. In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem.', '2020-02-14 15:00:00', '2020-02-14 16:30:00', 'workshop', '30.00'),
+(33, 13, 'Progressive Angular', 'Integer a nibh. In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet. Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti. Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris. Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.', '2021-09-30 09:00:00', '2021-09-30 09:45:00', 'talk', NULL),
+(34, 15, 'Unit Testing Angular', 'Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat. Nulla nisl. Nunc nisl.', '2021-09-30 09:00:00', '2021-09-30 09:45:00', 'talk', NULL),
+(35, 14, 'Advanced NGRX', 'Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat.', '2021-09-30 10:00:00', '2021-09-30 10:45:00', 'talk', NULL),
+(36, 11, 'Testing with Cypress.io', 'In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque. Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus. In sagittis dui vel nisl. Duis ac nibh.', '2021-09-30 10:00:00', '2021-09-30 10:45:00', 'talk', NULL),
+(37, 13, 'Web Components', 'Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros. Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat. In congue. Etiam justo. Etiam pretium iaculis justo. In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.', '2021-09-30 11:00:00', '2021-09-30 11:45:00', 'talk', NULL),
+(38, 16, 'Not Every App is a SPA', 'Nulla mollis molestie lorem. Quisque ut erat. Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.', '2021-09-30 11:00:00', '2021-09-30 11:45:00', 'talk', NULL),
+(39, 14, 'Using RxJS', 'Morbi non quam nec dui luctus rutrum. Nulla tellus. In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.', '2021-09-30 13:00:00', '2021-09-30 14:30:00', 'workshop', '75.50'),
+(40, 14, 'Angular Playground', 'Proin at turpis a pede posuere nonummy. Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue.', '2021-09-30 15:00:00', '2021-09-30 16:00:00', 'workshop', '50.00'),
+(41, 15, 'Advanced Cypress.io', 'Integer ac neque. Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus. In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.', '2021-09-30 15:00:00', '2021-09-30 16:00:00', 'workshop', '50.00'),
+(42, 16, 'UX in 2021', 'Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros. Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat. In congue. Etiam justo. Etiam pretium iaculis justo.', '2021-09-30 13:00:00', '2021-09-30 14:30:00', 'workshop', '75.50');
 
 -- --------------------------------------------------------
 
@@ -2115,7 +2125,11 @@ INSERT INTO `session_registrations` (`id`, `registration_id`, `session_id`) VALU
 (871, 702, 32),
 (872, 588, 32),
 (873, 589, 32),
-(874, 699, 32);
+(874, 699, 32),
+(875, 704, 4),
+(876, 704, 6),
+(877, 704, 9),
+(878, 704, 11);
 
 -- --------------------------------------------------------
 
@@ -2127,7 +2141,7 @@ CREATE TABLE `speakers` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `link` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `info` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `info` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `avatar` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -2136,8 +2150,8 @@ CREATE TABLE `speakers` (
 --
 
 INSERT INTO `speakers` (`id`, `name`, `link`, `info`, `avatar`) VALUES
-(1, 'Phan Trọng Tín', 'facebook.com/ptt1206/', 'My name is Tin', '1604113063.jpg'),
-(2, 'Some one', 'www.facebook.com/ptt1206/', 'Yollo', '1604114859.jpg');
+(1, 'Trong Tin', 'facebook.com/ptt1206/', 'My name is Tin', '1604122276.jpg'),
+(2, 'Some one', 'www.facebook.com', 'Yollo', '1604122379.png');
 
 -- --------------------------------------------------------
 
@@ -2150,6 +2164,17 @@ CREATE TABLE `speaker_sessions` (
   `session_id` int(11) NOT NULL,
   `speaker_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `speaker_sessions`
+--
+
+INSERT INTO `speaker_sessions` (`id`, `session_id`, `speaker_id`) VALUES
+(37, 24, 1),
+(39, 19, 1),
+(42, 18, 2),
+(46, 5, 1),
+(48, 4, 1);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -2262,7 +2287,7 @@ ALTER TABLE `speaker_sessions`
 -- AUTO_INCREMENT cho bảng `attendees`
 --
 ALTER TABLE `attendees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=212;
 
 --
 -- AUTO_INCREMENT cho bảng `channels`
@@ -2304,7 +2329,7 @@ ALTER TABLE `organizers`
 -- AUTO_INCREMENT cho bảng `registrations`
 --
 ALTER TABLE `registrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=703;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=705;
 
 --
 -- AUTO_INCREMENT cho bảng `rooms`
@@ -2328,7 +2353,7 @@ ALTER TABLE `session_ratings`
 -- AUTO_INCREMENT cho bảng `session_registrations`
 --
 ALTER TABLE `session_registrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=875;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=879;
 
 --
 -- AUTO_INCREMENT cho bảng `speakers`
@@ -2340,7 +2365,7 @@ ALTER TABLE `speakers`
 -- AUTO_INCREMENT cho bảng `speaker_sessions`
 --
 ALTER TABLE `speaker_sessions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
