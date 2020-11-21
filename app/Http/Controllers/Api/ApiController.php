@@ -167,7 +167,7 @@ class ApiController extends Controller
             ], 404);
 
         return response()->json([
-            'speakers' => new SpeakerRS($speaker)
+            'speaker' => new SpeakerRS($speaker)
         ], 200);
     }
 }
