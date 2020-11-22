@@ -56,8 +56,12 @@ class ApiController extends Controller
         if ($attendee == null)
             return response(['message' => 'Invalid login'], 401);
 
+        $token = openssl_random_pseudo_bytes(16);
+
+        $token = bin2hex($token);
+
         $attendee->update([
-            'login_token' => md5($attendee->firstname)
+            'login_token' => $token
         ]);
 
         return response()
@@ -74,7 +78,9 @@ class ApiController extends Controller
         $data = \request();
         if ($data['token'] == null)
             return response(['message' => 'Invalid token'], 401);
+
         $attendee = Attendee::where('login_token', $data['token'])->first();
+
         if ($attendee == null)
             return response(['message' => 'Invalid token'], 401);
 
