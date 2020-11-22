@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 20, 2020 lúc 05:35 AM
+-- Thời gian đã tạo: Th10 22, 2020 lúc 05:15 AM
 -- Phiên bản máy phục vụ: 10.1.38-MariaDB
 -- Phiên bản PHP: 7.3.2
 
@@ -34,7 +34,7 @@ CREATE TABLE `attendees` (
   `lastname` varchar(45) NOT NULL,
   `username` varchar(45) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `registration_code` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `login_token` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -42,7 +42,7 @@ CREATE TABLE `attendees` (
 -- Đang đổ dữ liệu cho bảng `attendees`
 --
 
-INSERT INTO `attendees` (`id`, `firstname`, `lastname`, `username`, `email`, `registration_code`, `login_token`) VALUES
+INSERT INTO `attendees` (`id`, `firstname`, `lastname`, `username`, `email`, `password`, `login_token`) VALUES
 (1, 'Horacio', 'Yakovich', 'attendee1', 'hyakovich0@va.gov', '35DGZX', ''),
 (2, 'Nanon', 'Darthe', 'attendee2', 'ndarthe1@list-manage.com', 'UP243M', ''),
 (3, 'Rutter', 'Wauchope', 'rwauchope2', 'rwauchope2@yolasite.com', 'B35B6T', ''),
@@ -247,7 +247,7 @@ INSERT INTO `attendees` (`id`, `firstname`, `lastname`, `username`, `email`, `re
 (202, 'Phan', 'Tín', 'asdasd', 'tin.phan1206@gmail.com', 'asd', ''),
 (203, 'Phan', 'Tína', 'asd', 'tin.phan1206@gmail.com', 'asd', ''),
 (204, 'asd', 'asddd', 'asd', 'asd', 'asd', ''),
-(205, 'asd', 'asdasd', 'asd', 'asdasd@email.com', 'asd', NULL),
+(205, 'asd', 'asdasd', 'asd', 'asdasd@email.com', 'asd', ''),
 (206, 'asdas', 'asdád', 'ađá', 'asdasd@email.comsa', '111', NULL),
 (207, '123', '123', '123', '123@email.com', '123', NULL),
 (208, '123', '123123', '123', '123@email.com', '123', ''),
@@ -308,7 +308,8 @@ INSERT INTO `events` (`id`, `organizer_id`, `name`, `slug`, `date`) VALUES
 (2, 1, 'React Conf 2018', 'react-conf-2018', '2018-06-12'),
 (3, 1, 'React Conf 2021', 'react-conf-2021', '2021-10-24'),
 (4, 2, 'Vuejs Amsterdam', 'vuejs-2022', '2022-02-14'),
-(5, 2, 'ng conf', 'ng-2021', '2021-09-30');
+(5, 2, 'ng conf', 'ng-2021', '2021-09-30'),
+(6, 1, '123', '123', '2020-12-01');
 
 -- --------------------------------------------------------
 
@@ -355,7 +356,8 @@ INSERT INTO `event_tickets` (`id`, `event_id`, `name`, `cost`, `special_validity
 (9, 4, 'Early Bird', '149.00', '{\"type\":\"date\",\"date\":\"2022-10-01\"}'),
 (10, 4, 'Sponsor', '599.00', NULL),
 (11, 5, 'Normal', '450.00', NULL),
-(12, 5, 'Front Row Seat', '550.00', '{\"type\":\"amount\",\"amount\":60}');
+(12, 5, 'Front Row Seat', '550.00', '{\"type\":\"amount\",\"amount\":60}'),
+(13, 6, '123', '123.00', NULL);
 
 -- --------------------------------------------------------
 
@@ -1121,7 +1123,11 @@ INSERT INTO `registrations` (`id`, `attendee_id`, `ticket_id`, `registration_tim
 (701, 38, 9, '2021-06-26 17:42:32'),
 (702, 87, 10, '2021-01-16 06:51:07'),
 (703, 208, 3, NULL),
-(704, 202, 3, NULL);
+(704, 202, 3, NULL),
+(705, 205, 3, NULL),
+(706, 205, 12, NULL),
+(707, 205, 6, NULL),
+(708, 205, 9, NULL);
 
 -- --------------------------------------------------------
 
@@ -2129,7 +2135,13 @@ INSERT INTO `session_registrations` (`id`, `registration_id`, `session_id`) VALU
 (875, 704, 4),
 (876, 704, 6),
 (877, 704, 9),
-(878, 704, 11);
+(878, 704, 11),
+(879, 706, 39),
+(880, 706, 40),
+(881, 706, 41),
+(882, 706, 42),
+(883, 708, 32),
+(884, 708, 31);
 
 -- --------------------------------------------------------
 
@@ -2299,7 +2311,7 @@ ALTER TABLE `channels`
 -- AUTO_INCREMENT cho bảng `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `event_ratings`
@@ -2311,7 +2323,7 @@ ALTER TABLE `event_ratings`
 -- AUTO_INCREMENT cho bảng `event_tickets`
 --
 ALTER TABLE `event_tickets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT cho bảng `migrations`
@@ -2329,7 +2341,7 @@ ALTER TABLE `organizers`
 -- AUTO_INCREMENT cho bảng `registrations`
 --
 ALTER TABLE `registrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=705;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=709;
 
 --
 -- AUTO_INCREMENT cho bảng `rooms`
@@ -2353,7 +2365,7 @@ ALTER TABLE `session_ratings`
 -- AUTO_INCREMENT cho bảng `session_registrations`
 --
 ALTER TABLE `session_registrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=879;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=885;
 
 --
 -- AUTO_INCREMENT cho bảng `speakers`

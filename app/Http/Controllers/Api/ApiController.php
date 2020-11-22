@@ -46,18 +46,18 @@ class ApiController extends Controller
 
     function login(){
         $data = \request();
-        if ($data['lastname'] == null)
+        if ($data['username'] == null)
             return response(['message' => 'Invalid login'], 401);
 
-        $attendee = Attendee::where('lastname', $data['lastname'])
-            ->where('registration_code', $data['registration_code'])
+        $attendee = Attendee::where('username', $data['username'])
+            ->where('password', $data['password'])
             ->first();
 
         if ($attendee == null)
             return response(['message' => 'Invalid login'], 401);
 
         $attendee->update([
-            'login_token' => md5($attendee->username)
+            'login_token' => md5($attendee->firstname)
         ]);
 
         return response()
@@ -79,7 +79,7 @@ class ApiController extends Controller
             return response(['message' => 'Invalid token'], 401);
 
         $attendee->update([
-            'login_token' => ''
+            'token' => ''
         ]);
 
         return response(['message' => 'Logout success'], 200);
@@ -87,7 +87,7 @@ class ApiController extends Controller
 
     function registerAccount(){
         $data = \request();
-        if (Attendee::where('lastname', $data['lastname'])->first() != null)
+        if (Attendee::where('username', $data['username'])->first() != null)
             return response()->json([
                 'message' => 'Lastname is already used'
             ], 401);
@@ -97,8 +97,8 @@ class ApiController extends Controller
             'lastname' => '',
             'username' => '',
             'email' => '',
-            'token' => '',
-            'registration_code' => '',
+            'login_token' => '',
+            'password' => '',
         ]);
 
         Attendee::create($data);
