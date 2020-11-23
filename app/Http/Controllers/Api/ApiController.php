@@ -85,7 +85,7 @@ class ApiController extends Controller
             return response(['message' => 'Invalid token'], 401);
 
         $attendee->update([
-            'token' => ''
+            'login_token' => ''
         ]);
 
         return response(['message' => 'Logout success'], 200);
@@ -95,7 +95,7 @@ class ApiController extends Controller
         $data = \request();
         if (Attendee::where('username', $data['username'])->first() != null)
             return response()->json([
-                'message' => 'Lastname is already used'
+                'message' => 'Username is already used'
             ], 401);
 
         $data = $data->validate([

@@ -3,6 +3,8 @@
 use App\Attendee;
 use App\Organizer;
 use App\Session;
+use App\Speaker;
+use App\Speaker_session;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -24,9 +26,16 @@ class DatabaseSeeder extends Seeder
 //                'password_hash' => bcrypt('demopass2')
 //            ]);
 
-        foreach (Attendee::all() as $value)
-            $value->update([
-                'password' => bcrypt($value->password)
+//        foreach (Attendee::all() as $value)
+//            $value->update([
+//                'password' => bcrypt($value->password)
+//            ]);
+
+        foreach (Session::all() as $item) {
+            Speaker_session::create([
+                'session_id' => $item->id,
+                'speaker_id' => '1'
             ]);
+        }
     }
 }
