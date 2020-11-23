@@ -50,7 +50,7 @@ class ApiController extends Controller
             return response(['message' => 'Invalid login'], 401);
 
         $attendee = Attendee::where('username', $data['username'])
-            ->where('password', bcrypt($data['password']))
+            ->where('password', md5($data['password']))
             ->first();
 
         if ($attendee == null)
@@ -107,7 +107,7 @@ class ApiController extends Controller
             'password' => '',
         ]);
 
-        $data['password'] = bcrypt($data['password']);
+        $data['password'] = md5($data['password']);
 
         Attendee::create($data);
         return response()->json([
