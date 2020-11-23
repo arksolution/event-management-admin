@@ -15,6 +15,7 @@ use App\Speaker;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class ApiController extends Controller
 {
@@ -50,10 +51,9 @@ class ApiController extends Controller
             return response(['message' => 'Invalid login'], 401);
 
         $attendee = Attendee::where('username', $data['username'])
-            ->where('password', md5($data['password']))
             ->first();
 
-        if ($attendee == null)
+        if ($attendee == null || !Hash::check($data['password'], $attendee->password))
             return response(['message' => 'Invalid login'], 401);
 
         $token = openssl_random_pseudo_bytes(16);
@@ -107,7 +107,7 @@ class ApiController extends Controller
             'password' => '',
         ]);
 
-        $data['password'] = md5($data['password']);
+        $data['password'] = bcrypt($data['password']);
 
         Attendee::create($data);
         return response()->json([

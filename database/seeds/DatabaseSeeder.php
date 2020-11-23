@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
 
         foreach (Attendee::all() as $value)
             $value->update([
-                'password' => md5("123")
+                'password' => bcrypt("123")
             ]);
 
 //        foreach (Session::all() as $item) {
